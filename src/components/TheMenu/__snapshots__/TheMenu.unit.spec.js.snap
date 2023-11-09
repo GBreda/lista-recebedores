@@ -1,0 +1,15 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`TheMenu > should match the snapshot 1`] = `
+<div
+  class="the-menu"
+  data-v-677364ff=""
+>
+  <span
+    class="the-menu__text"
+    data-v-677364ff=""
+  >
+    Seus favorecidos
+  </span>
+</div>
+`;

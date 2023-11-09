@@ -1,0 +1,17 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`TheMenu > should match the snapshot 1`] = `
+<div
+  class="bg-teal-accent-4 pt-3 pb-4 ps-12 the-menu"
+  data-v-677364ff=""
+>
+  <router-link
+    active-class="the-menu--border-bottom"
+    class="text-white text-body-2 pt-3 pb-4 the-menu--link"
+    data-v-677364ff=""
+    to="/"
+  >
+    Seus favorecidos
+  </router-link>
+</div>
+`;

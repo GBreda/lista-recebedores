@@ -1,0 +1,15 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`TheHeader > should match the snapshot 1`] = `
+<header
+  class="the-header"
+  data-v-27be5419=""
+>
+  <img
+    alt="Transfeera logo"
+    data-test-id="logo"
+    data-v-27be5419=""
+    src="/src/assets/images/logo.png"
+  />
+</header>
+`;
