@@ -1,0 +1,21 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`SearchInput > should match the snapshot 1`] = `
+<div
+  class="search"
+  data-v-4a4b4034=""
+>
+  <input
+    class="search__input"
+    data-test-id="search-input"
+    data-v-4a4b4034=""
+    placeholder="Nome, CPF, agência ou conta"
+    type="text"
+  />
+  <img
+    class="search__icon"
+    data-v-4a4b4034=""
+    src="/src/assets/images/search-icon.png"
+  />
+</div>
+`;

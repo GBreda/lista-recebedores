@@ -8,4 +8,23 @@ html {
 body {
   font-family: 'Roboto', 'sans-serif';
   font-size: 1.4rem;
+  color: $body-color;
+}
+
+input[type='text'] {
+  border: 0.2rem solid rgba($gray, 0.2);
+  padding: 0.8rem 0 0.7rem 0.5rem;
+  transition: border-color 0.2s ease-in-out;
+
+  &::placeholder {
+    font-size: 1.4rem;
+    font-weight: 300;
+    color: $gray;
+    font-family: 'Roboto', 'sans-serif';
+  }
+
+  &:focus {
+    outline: none;
+    border-color: $green;
+  }
 }
