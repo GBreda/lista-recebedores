@@ -1,8 +1,8 @@
 import ApiClient from './ApiClientService'
 
 const ReceiversService = {
-  fetchReceivers() {
-    return ApiClient.get('/receivers')
+  fetchReceivers({ page, limit }) {
+    return ApiClient.get(`/receivers?_page=${page}&_limit=${limit}`)
   }
 }
 
