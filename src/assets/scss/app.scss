@@ -28,3 +28,46 @@ input[type='text'] {
     border-color: $green;
   }
 }
+
+button {
+  font-size: 1.4rem;
+  color: $white;
+  width: 15.8rem;
+  height: 5rem;
+  border: none;
+  padding: 0;
+  border-radius: 0.6rem;
+  cursor: pointer;
+}
+
+.button-danger {
+  background-color: $red;
+
+  &:disabled {
+    background-color: $lighter-red;
+    pointer-events: none;
+    cursor: default;
+  }
+
+  &:hover {
+    background-color: $darker-red;
+  }
+}
+
+.button-outline {
+  background-color: $white;
+  border: 1px solid $green;
+  color: $green;
+
+  &:hover {
+    background-color: rgba($green, 0.2);
+  }
+}
+
+.button-primary {
+  background-color: $blue;
+
+  &:hover {
+    background-color: $darker-blue;
+  }
+}

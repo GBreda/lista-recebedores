@@ -42,7 +42,7 @@ const statusList = computed(() => {
   }
 
   &-draft {
-    background-color: $darken-gray;
+    background-color: $darker-gray;
   }
 
   &-validated {

@@ -1,5 +1,11 @@
 <template>
   <div class="receivers-table">
+    <button
+      class="button-danger receivers-table__delete-button"
+      :disabled="isDeleteButtonDisabled"
+    >
+      Excluir selecionados
+    </button>
     <table>
       <tr>
         <th>Favorecido</th>
@@ -12,7 +18,7 @@
       <tr v-for="(data, index) in tableData" :key="index">
         <td>
           <span>{{ data.name }}</span>
-          <a class="table-link" v-if="data.status === 'rascunho'">( Clicável )</a>
+          <a class="receivers-table__link" v-if="data.status === 'rascunho'">( Clicável )</a>
         </td>
         <td>{{ formatDocument(data) }}</td>
         <td>{{ data.bank_name || '-'}}</td>
@@ -34,6 +40,7 @@ const { cpfMask, cnpjMask } = useFormatDocuments();
 
 const tableData = ref([])
 const isLoading = ref(false);
+const isDeleteButtonDisabled = ref(true);
 
 const fetchTableData = async () => {
   isLoading.value = true
@@ -57,7 +64,6 @@ const fetchTableData = async () => {
 fetchTableData()
 
 const formatDocument = ({ pix_key, pix_key_type }) => {
-
   if (pix_key_type === 'cnpj') return cnpjMask(pix_key)
   if (pix_key_type === 'cpf') return cpfMask(pix_key)
   if (pix_key_type === 'aleatoria') return pix_key
@@ -70,13 +76,23 @@ const formatDocument = ({ pix_key, pix_key_type }) => {
 .receivers-table {
  padding: 4rem 5rem;
 
+ &__delete-button {
+  margin-bottom: 4rem;
+ }
+
+ &__link {
+  margin-left: 0.5rem;
+  font-weight: 600;
+  cursor: pointer;
+ }
+
  table {
   width: 100%;
  }
 
  th {
   font-weight: 600;
-  color: $darken-gray;
+  color: $darker-gray;
   padding: 1.6rem;
   font-size: 1.6rem;
   text-align: left;
@@ -89,15 +105,4 @@ const formatDocument = ({ pix_key, pix_key_type }) => {
  }
 }
 
-.table-link {
-  margin-left: 0.5rem;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-@media only screen and (max-width: 1200px) {
-  .receivers-table {
-    overflow-x: auto;
-  }
-}
 </style>
