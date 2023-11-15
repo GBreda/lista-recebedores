@@ -1,12 +1,17 @@
 <template>
   <the-menu />
   <actions-bar />
-  <receivers-table @open:modal="openModal" />
+  <receivers-table @open:modal="openModal" @open:deleteModal="openDeleteModal" />
   <edit-modal :showEditModal="showEditModal" :data="modalData" @close:modal="closeModal('edit')" />
   <detail-modal
     :showDetailModal="showDetailModal"
     :data="modalData"
     @close:modal="closeModal('detail')"
+  />
+  <delete-modal
+    :showDeleteModal="showDeleteModal"
+    :data="modalData"
+    @close:modal="closeModal('delete')"
   />
 </template>
 
@@ -17,9 +22,11 @@ import ActionsBar from '@/components/ActionsBar/ActionsBar.vue'
 import ReceiversTable from '@/components/ReceiversTable/ReceiversTable.vue'
 import EditModal from '@/components/EditModal/EditModal.vue'
 import DetailModal from '@/components/DetailModal/DetailModal.vue'
+import DeleteModal from '@/components/DeleteModal/DeleteModal.vue'
 
 const showEditModal = ref(false)
 const showDetailModal = ref(false)
+const showDeleteModal = ref(false)
 
 const modalData = ref()
 
@@ -33,11 +40,22 @@ const openModal = (data) => {
   }
 }
 
+const openDeleteModal = (data) => {
+  console.log(data)
+  modalData.value = data
+
+  showDeleteModal.value = true
+}
+
 const closeModal = (type) => {
   if (type === 'edit') {
     showEditModal.value = false
-  } else {
+  }
+
+  if (type === 'detail') {
     showDetailModal.value = false
   }
+
+  showDeleteModal.value = false
 }
 </script>

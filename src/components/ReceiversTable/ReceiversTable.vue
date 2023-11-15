@@ -1,6 +1,10 @@
 <template>
   <div class="receivers-table">
-    <button class="button-danger receivers-table__delete-button" :disabled="isDeleteButtonDisabled">
+    <button
+      class="button-danger receivers-table__delete-button"
+      :disabled="isDeleteButtonDisabled"
+      @click="deleteReceivers"
+    >
       Excluir selecionados
     </button>
     <table>
@@ -35,13 +39,13 @@ import ReceiversService from '@/services/ReceiversService'
 import useFormatDocuments from '@/composables/useFormatDocuments'
 import StatusPill from '@/components/StatusPill/StatusPill.vue'
 
-const emit = defineEmits(['open:modal'])
+const emit = defineEmits(['open:modal', 'open:deleteModal'])
 
 const { cpfMask, cnpjMask } = useFormatDocuments()
 
 const tableData = ref([])
 const isLoading = ref(false)
-const isDeleteButtonDisabled = ref(true)
+const isDeleteButtonDisabled = ref(false)
 
 const fetchTableData = async () => {
   isLoading.value = true
@@ -75,6 +79,10 @@ const formatPixKey = ({ pix_key, pix_key_type }) => {
 
 const openModal = (data) => {
   emit('open:modal', data)
+}
+
+const deleteReceivers = (data) => {
+  emit('open:deleteModal', data)
 }
 </script>
 
