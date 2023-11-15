@@ -30,6 +30,11 @@ select {
   }
 }
 
+input[type='checkbox'] {
+  width: 1.6rem;
+  height: 1.6rem;
+}
+
 option {
   color: $body-color;
   font-size: 1.4rem;

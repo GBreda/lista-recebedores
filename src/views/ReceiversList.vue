@@ -1,13 +1,18 @@
 <template>
   <the-menu />
+
   <actions-bar />
+
   <receivers-table @open:modal="openModal" @open:deleteModal="openDeleteModal" />
+
   <edit-modal :showEditModal="showEditModal" :data="modalData" @close:modal="closeModal('edit')" />
+
   <detail-modal
     :showDetailModal="showDetailModal"
     :data="modalData"
     @close:modal="closeModal('detail')"
   />
+
   <delete-modal
     :showDeleteModal="showDeleteModal"
     :data="modalData"
@@ -41,7 +46,6 @@ const openModal = (data) => {
 }
 
 const openDeleteModal = (data) => {
-  console.log(data)
   modalData.value = data
 
   showDeleteModal.value = true

@@ -7,8 +7,12 @@
     >
       Excluir selecionados
     </button>
+
     <table v-if="tableData.length">
       <tr>
+        <th>
+          <input type="checkbox" v-model="selectAll" @change="selectAllRows" />
+        </th>
         <th>Favorecido</th>
         <th>Chave Pix</th>
         <th>Banco</th>
@@ -20,8 +24,11 @@
         class="table-row"
         v-for="(data, index) in tableData"
         :key="index"
-        @click="openModal(data)"
+        @click="handleRowClick(data, $event)"
       >
+        <td>
+          <input type="checkbox" :checked="isSelected(data)" @change="handleRowSelection(data)" />
+        </td>
         <td>{{ data.name }}</td>
         <td>{{ formatPixKey(data) }}</td>
         <td>{{ data.bank_name || '-' }}</td>
@@ -36,49 +43,27 @@
 
 <script setup>
 import { ref, computed, watch } from 'vue'
-import ReceiversService from '@/services/ReceiversService'
 import useFormatDocuments from '@/composables/useFormatDocuments'
+import useReceiversTable from '@/composables/useReceiversTable'
 import StatusPill from '@/components/StatusPill/StatusPill.vue'
 import { useSearchInputStore } from '@/stores/searchInputStore'
-import { useToastStore } from '@/stores/toastStore'
-
-const searchInputStore = useSearchInputStore()
-const toastStore = useToastStore()
+import { useReceiversTableStore } from '@/stores/receiversTableStore'
 
 const emit = defineEmits(['open:modal', 'open:deleteModal'])
 
-const { cpfMask, cnpjMask } = useFormatDocuments()
+const searchInputStore = useSearchInputStore()
+const receiversTableStore = useReceiversTableStore()
 
-const tableData = ref([])
-const isLoading = ref(false)
-const isDeleteButtonDisabled = ref(true)
+const { cpfMask, cnpjMask } = useFormatDocuments()
+const { fetchTableData } = useReceiversTable()
+
+const selectAll = ref(false)
+const selectedRows = ref([])
 
 const searchInput = computed(() => searchInputStore.input)
+const tableData = computed(() => receiversTableStore.tableData)
 
-const fetchTableData = async () => {
-  isLoading.value = true
-
-  try {
-    // TODO: Pagination
-    const payload = {
-      page: 1,
-      limit: 8,
-      search: searchInput.value
-    }
-
-    const { data } = await ReceiversService.fetchReceivers(payload)
-
-    tableData.value = data
-  } catch {
-    toastStore.setToastInfo({
-      showToast: true,
-      message: 'Erro inesperado, por favor tente novamente.',
-      kind: 'danger'
-    })
-  } finally {
-    isLoading.value = false
-  }
-}
+const isDeleteButtonDisabled = computed(() => !selectedRows.value.length)
 
 fetchTableData()
 
@@ -98,8 +83,31 @@ const openModal = (data) => {
   emit('open:modal', data)
 }
 
-const deleteReceivers = (data) => {
-  emit('open:deleteModal', data)
+const deleteReceivers = () => {
+  emit('open:deleteModal', selectedRows)
+}
+
+const handleRowClick = (data, event) => {
+  if (event.target.tagName.toLowerCase() !== 'input') {
+    openModal(data)
+  }
+}
+
+const isSelected = (data) => {
+  return selectedRows.value.includes(data)
+}
+
+const selectAllRows = () => {
+  selectedRows.value = selectAll.value ? [...tableData.value] : []
+}
+
+const handleRowSelection = (data) => {
+  if (isSelected(data)) {
+    selectedRows.value = selectedRows.value.filter((row) => row !== data)
+  } else {
+    selectedRows.value.push(data)
+  }
+  selectAll.value = selectedRows.value.length === tableData.value.length
 }
 </script>
 
