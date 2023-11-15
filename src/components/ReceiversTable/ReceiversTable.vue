@@ -7,7 +7,7 @@
     >
       Excluir selecionados
     </button>
-    <table>
+    <table v-if="tableData.length">
       <tr>
         <th>Favorecido</th>
         <th>Chave Pix</th>
@@ -30,14 +30,18 @@
         <td><status-pill :status="data.status" /></td>
       </tr>
     </table>
+    <p class="receivers-table__empty-table" v-else>Sua busca não obteve resultados.</p>
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, computed, watch } from 'vue'
 import ReceiversService from '@/services/ReceiversService'
 import useFormatDocuments from '@/composables/useFormatDocuments'
 import StatusPill from '@/components/StatusPill/StatusPill.vue'
+import { useSearchInputStore } from '@/stores/searchInputStore'
+
+const searchInputStore = useSearchInputStore()
 
 const emit = defineEmits(['open:modal', 'open:deleteModal'])
 
@@ -47,6 +51,8 @@ const tableData = ref([])
 const isLoading = ref(false)
 const isDeleteButtonDisabled = ref(false)
 
+const searchInput = computed(() => searchInputStore.input)
+
 const fetchTableData = async () => {
   isLoading.value = true
 
@@ -54,7 +60,8 @@ const fetchTableData = async () => {
     // TODO: Pagination
     const payload = {
       page: 1,
-      limit: 8
+      limit: 8,
+      search: searchInput.value
     }
 
     const { data } = await ReceiversService.fetchReceivers(payload)
@@ -68,6 +75,10 @@ const fetchTableData = async () => {
 }
 
 fetchTableData()
+
+watch(searchInput, () => {
+  fetchTableData()
+})
 
 const formatPixKey = ({ pix_key, pix_key_type }) => {
   if (pix_key_type === 'cnpj') return cnpjMask(pix_key)
@@ -96,24 +107,30 @@ const deleteReceivers = (data) => {
 
   table {
     width: 100%;
+    .table-row {
+      cursor: pointer;
+    }
+
+    th {
+      font-weight: 600;
+      color: $darker-gray;
+      padding: 1.6rem;
+      font-size: 1.6rem;
+      text-align: left;
+    }
+
+    td {
+      padding: 1.6rem;
+      font-size: 1.6rem;
+      font-weight: 300;
+    }
   }
 
-  .table-row {
-    cursor: pointer;
-  }
-
-  th {
-    font-weight: 600;
-    color: $darker-gray;
-    padding: 1.6rem;
-    font-size: 1.6rem;
-    text-align: left;
-  }
-
-  td {
-    padding: 1.6rem;
-    font-size: 1.6rem;
+  &__empty-table {
+    font-size: 2.8rem;
     font-weight: 300;
+    text-align: center;
+    margin-top: 3rem;
   }
 }
 </style>
