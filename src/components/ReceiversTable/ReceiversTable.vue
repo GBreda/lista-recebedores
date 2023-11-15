@@ -40,8 +40,10 @@ import ReceiversService from '@/services/ReceiversService'
 import useFormatDocuments from '@/composables/useFormatDocuments'
 import StatusPill from '@/components/StatusPill/StatusPill.vue'
 import { useSearchInputStore } from '@/stores/searchInputStore'
+import { useToastStore } from '@/stores/toastStore'
 
 const searchInputStore = useSearchInputStore()
+const toastStore = useToastStore()
 
 const emit = defineEmits(['open:modal', 'open:deleteModal'])
 
@@ -49,7 +51,7 @@ const { cpfMask, cnpjMask } = useFormatDocuments()
 
 const tableData = ref([])
 const isLoading = ref(false)
-const isDeleteButtonDisabled = ref(false)
+const isDeleteButtonDisabled = ref(true)
 
 const searchInput = computed(() => searchInputStore.input)
 
@@ -68,7 +70,11 @@ const fetchTableData = async () => {
 
     tableData.value = data
   } catch {
-    console.log('error')
+    toastStore.setToastInfo({
+      showToast: true,
+      message: 'Erro inesperado, por favor tente novamente.',
+      kind: 'danger'
+    })
   } finally {
     isLoading.value = false
   }
