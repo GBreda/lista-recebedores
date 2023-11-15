@@ -5,6 +5,7 @@
       class="the-toast__close-icon"
       src="@/assets/images/blur-close-icon.png"
       alt="Fechar alerta"
+      data-test-id="close-toast"
       @click="closeToast"
     />
   </div>

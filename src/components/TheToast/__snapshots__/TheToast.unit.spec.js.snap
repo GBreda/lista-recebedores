@@ -1,0 +1,19 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`TheToast > should match the snapshot 1`] = `
+<div
+  class="the-toast the-toast__success"
+>
+  <p
+    class="the-toast__message"
+  >
+    Success Message
+  </p>
+  <img
+    alt="Fechar alerta"
+    class="the-toast__close-icon"
+    data-test-id="close-toast"
+    src="/src/assets/images/blur-close-icon.png"
+  />
+</div>
+`;

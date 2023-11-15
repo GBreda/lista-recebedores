@@ -5,11 +5,13 @@ exports[`TheMenu > should match the snapshot 1`] = `
   class="the-menu"
   data-v-677364ff=""
 >
-  <span
-    class="the-menu__text"
+  <a
+    class="the-menu__link"
+    data-test-id="menu-link"
     data-v-677364ff=""
+    href="/"
   >
     Seus favorecidos
-  </span>
+  </a>
 </div>
 `;

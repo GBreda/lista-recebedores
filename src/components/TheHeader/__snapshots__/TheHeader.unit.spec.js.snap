@@ -5,11 +5,17 @@ exports[`TheHeader > should match the snapshot 1`] = `
   class="the-header"
   data-v-27be5419=""
 >
-  <img
-    alt="Transfeera logo"
-    data-test-id="logo"
+  <a
+    class=""
     data-v-27be5419=""
-    src="/src/assets/images/logo.png"
-  />
+    href="/"
+  >
+    <img
+      alt="Transfeera logo"
+      data-test-id="logo"
+      data-v-27be5419=""
+      src="/src/assets/images/logo.png"
+    />
+  </a>
 </header>
 `;

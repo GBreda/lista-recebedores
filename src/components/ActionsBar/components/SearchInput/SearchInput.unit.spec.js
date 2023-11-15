@@ -31,14 +31,12 @@ describe('SearchInput', () => {
     expect(wrapper.element).toMatchSnapshot()
   })
 
-  it('should emit input event on search input', async () => {
+  it('should call store action on search input', async () => {
     wrapper = mountSearchInput()
 
     const store = useSearchInputStore()
 
-    const input = wrapper.find("[data-test-id='search-input']")
-
-    input.setValue('conta x')
+    await wrapper.find("[data-test-id='search-input']").setValue('conta x')
 
     expect(store.setSearchInputValue).toHaveBeenCalled()
     expect(store.setSearchInputValue).toHaveBeenLastCalledWith('conta x')

@@ -1,0 +1,15 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`StatusPill > should match the snapshot 1`] = `
+<div
+  class="status-pill status-pill-draft"
+  data-v-0df7919f=""
+>
+  <p
+    class="status-pill--text"
+    data-v-0df7919f=""
+  >
+    Rascunho
+  </p>
+</div>
+`;

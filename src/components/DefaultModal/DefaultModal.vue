@@ -3,20 +3,33 @@
     <div class="modal--overlay">
       <div class="modal__container">
         <slot name="header">
-          <div class="modal__container__header">
-            <img src="@/assets/images/dark-close-icon.png" alt="Fechar modal" @click="closeModal" />
+          <div class="modal__container__header" data-test-id="header">
+            <img
+              src="@/assets/images/dark-close-icon.png"
+              alt="Fechar modal"
+              @click="closeModal"
+              data-test-id="close-modal"
+            />
           </div>
         </slot>
-        <slot name="body" />
+        <slot name="body" data-test-id="body" />
 
-        <slot name="footer">
+        <slot name="footer" data-test-id="footer">
           <div class="modal__container__footer">
-            <button class="button-outline" @click="closeModal">Voltar</button>
+            <button class="button-outline" @click="closeModal" data-test-id="back-button">
+              Voltar
+            </button>
             <div class="modal__container__footer__edit-actions">
-              <button class="button-danger modal__container__footer__delete-button" @click="remove">
+              <button
+                class="button-danger modal__container__footer__delete-button"
+                @click="remove"
+                data-test-id="remove-button"
+              >
                 <img src="@/assets/images/trash-icon.png" alt="Excluir recebedor" />
               </button>
-              <button class="button-primary" @click="confirm">Salvar</button>
+              <button class="button-primary" @click="confirm" data-test-id="confirm-button">
+                Salvar
+              </button>
             </div>
           </div>
         </slot>

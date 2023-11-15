@@ -1,6 +1,10 @@
 <template>
   <div class="the-menu">
-    <router-link class="the-menu__link" to="/" active-class="the-menu__active"
+    <router-link
+      class="the-menu__link"
+      data-test-id="menu-link"
+      to="/"
+      active-class="the-menu__active"
       >Seus favorecidos</router-link
     >
   </div>

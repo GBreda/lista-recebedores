@@ -1,0 +1,72 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`DefaultModal > should match the snapshot 1`] = `
+<div
+  class="modal"
+  data-v-5db2f97c=""
+>
+  <div
+    class="modal--overlay"
+    data-v-5db2f97c=""
+  >
+    <div
+      class="modal__container"
+      data-v-5db2f97c=""
+    >
+      
+      <div
+        class="modal__container__header"
+        data-test-id="header"
+        data-v-5db2f97c=""
+      >
+        <img
+          alt="Fechar modal"
+          data-test-id="close-modal"
+          data-v-5db2f97c=""
+          src="/src/assets/images/dark-close-icon.png"
+        />
+      </div>
+      
+      
+      
+      
+      <div
+        class="modal__container__footer"
+        data-v-5db2f97c=""
+      >
+        <button
+          class="button-outline"
+          data-test-id="back-button"
+          data-v-5db2f97c=""
+        >
+           Voltar 
+        </button>
+        <div
+          class="modal__container__footer__edit-actions"
+          data-v-5db2f97c=""
+        >
+          <button
+            class="button-danger modal__container__footer__delete-button"
+            data-test-id="remove-button"
+            data-v-5db2f97c=""
+          >
+            <img
+              alt="Excluir recebedor"
+              data-v-5db2f97c=""
+              src="/src/assets/images/trash-icon.png"
+            />
+          </button>
+          <button
+            class="button-primary"
+            data-test-id="confirm-button"
+            data-v-5db2f97c=""
+          >
+             Salvar 
+          </button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</div>
+`;
