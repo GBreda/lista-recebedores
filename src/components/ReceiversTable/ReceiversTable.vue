@@ -19,7 +19,7 @@
         @click="openModal(data)"
       >
         <td>{{ data.name }}</td>
-        <td>{{ formatDocument(data) }}</td>
+        <td>{{ formatPixKey(data) }}</td>
         <td>{{ data.bank_name || '-' }}</td>
         <td>{{ data.branch || '-' }}</td>
         <td>{{ data.account || '-' }}</td>
@@ -65,7 +65,7 @@ const fetchTableData = async () => {
 
 fetchTableData()
 
-const formatDocument = ({ pix_key, pix_key_type }) => {
+const formatPixKey = ({ pix_key, pix_key_type }) => {
   if (pix_key_type === 'cnpj') return cnpjMask(pix_key)
   if (pix_key_type === 'cpf') return cpfMask(pix_key)
   if (pix_key_type === 'aleatoria' || pix_key_type === 'email') return pix_key
