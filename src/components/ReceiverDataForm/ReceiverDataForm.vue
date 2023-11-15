@@ -10,7 +10,7 @@
       <input
         type="text"
         id="document"
-        v-model="form.document"
+        v-model="form.tax_id"
         @input="updateFormInputDocument"
         :maxlength="CNPJ_LENGTH"
       />
@@ -36,7 +36,7 @@ const CNPJ_LENGTH = 18
 
 const form = reactive({
   name: null,
-  document: null,
+  tax_id: null,
   email: null
 })
 
@@ -45,10 +45,10 @@ const updateFormInputName = () => {
 }
 
 const updateFormInputDocument = () => {
-  if (form.document.length > CPF_LENGTH) {
-    form.document = cnpjMask(form.document)
+  if (form.tax_id.length > CPF_LENGTH) {
+    form.tax_id = cnpjMask(form.tax_id)
   } else {
-    form.document = cpfMask(form.document)
+    form.tax_id = cpfMask(form.tax_id)
   }
 
   emit('update:receiverDataForm', form)

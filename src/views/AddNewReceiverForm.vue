@@ -29,10 +29,14 @@
 <script setup>
 import { reactive } from 'vue'
 import { useRouter } from 'vue-router'
+import ReceiversService from '@/services/ReceiversService'
+import { useToastStore } from '@/stores/toastStore'
 import ReceiverDataForm from '@/components/ReceiverDataForm/ReceiverDataForm.vue'
 import PixKeyForm from '@/components/PixKeyForm/PixKeyForm.vue'
 
 const router = useRouter()
+
+const toastStore = useToastStore()
 
 let formPayload = reactive({})
 
@@ -48,8 +52,24 @@ const updatePixKeyForm = (pixKeyForm) => {
   formPayload = { ...formPayload, ...pixKeyForm }
 }
 
-const saveNewReceiver = () => {
-  console.log(formPayload)
+const saveNewReceiver = async () => {
+  try {
+    await ReceiversService.addNewReceiver(formPayload)
+
+    toastStore.setToastInfo({
+      showToast: true,
+      message: 'Favorecido adicionado com sucesso!',
+      kind: 'success'
+    })
+
+    backToReceiversList()
+  } catch {
+    toastStore.setToastInfo({
+      showToast: true,
+      message: 'Erro inesperado ao adicionar favorecidos',
+      kind: 'danger'
+    })
+  }
 }
 </script>
 
