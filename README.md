@@ -1,41 +1,33 @@
-# recebedores
+### Como rodar o projeto localmente
 
-This template should help get you started developing with Vue 3 in Vite.
+1- Instalar as dependências
 
-## Recommended IDE Setup
-
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
-
-```sh
+```
 npm install
 ```
 
-### Compile and Hot-Reload for Development
+2- Subir a API com dados mockados localmente
 
-```sh
+```
+npm run start:api
+```
+
+3- Subir o projeto Vue localmente
+
+```
 npm run dev
 ```
 
-### Compile and Minify for Production
+### Testes Unitários
 
-```sh
-npm run build
+1- Executar todos os testes
+
 ```
-
-### Run Unit Tests with [Vitest](https://vitest.dev/)
-
-```sh
 npm run test:unit
 ```
 
-### Lint with [ESLint](https://eslint.org/)
+2- Verificar a cobertura dos testes que foram aplicados
 
-```sh
-npm run lint
+```
+npm run test:coverage
 ```
