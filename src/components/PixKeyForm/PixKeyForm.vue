@@ -50,8 +50,6 @@ const updateKey = () => {
 
 <style lang="scss" scoped>
 .pix-key-form {
-  margin-bottom: 8rem;
-
   select,
   input {
     width: 100%;

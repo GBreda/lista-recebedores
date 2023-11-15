@@ -10,7 +10,7 @@
     </div>
 
     <div class="add-new-receiver-form">
-      <h2 class="add-new-receiver-form__title">Quais os dados favorecido?</h2>
+      <h2 class="add-new-receiver-form__title">Quais os dados do favorecido?</h2>
 
       <receiver-data-form @update:receiverDataForm="updateReceiverDataForm" />
 
@@ -78,6 +78,7 @@ const saveNewReceiver = () => {
   }
 
   &__actions {
+    margin-top: 8rem;
     display: flex;
     justify-content: space-between;
   }

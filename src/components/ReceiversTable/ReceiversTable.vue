@@ -12,11 +12,13 @@
         <th>CC</th>
         <th>Status do favorecido</th>
       </tr>
-      <tr v-for="(data, index) in tableData" :key="index">
-        <td>
-          <span>{{ data.name }}</span>
-          <a class="receivers-table__link" v-if="data.status === 'rascunho'">( Clicável )</a>
-        </td>
+      <tr
+        class="table-row"
+        v-for="(data, index) in tableData"
+        :key="index"
+        @click="openModal(data)"
+      >
+        <td>{{ data.name }}</td>
         <td>{{ formatDocument(data) }}</td>
         <td>{{ data.bank_name || '-' }}</td>
         <td>{{ data.branch || '-' }}</td>
@@ -33,6 +35,8 @@ import ReceiversService from '@/services/ReceiversService'
 import useFormatDocuments from '@/composables/useFormatDocuments'
 import StatusPill from '@/components/StatusPill/StatusPill.vue'
 
+const emit = defineEmits(['open:modal'])
+
 const { cpfMask, cnpjMask } = useFormatDocuments()
 
 const tableData = ref([])
@@ -43,6 +47,7 @@ const fetchTableData = async () => {
   isLoading.value = true
 
   try {
+    // TODO: Pagination
     const payload = {
       page: 1,
       limit: 8
@@ -67,6 +72,10 @@ const formatDocument = ({ pix_key, pix_key_type }) => {
 
   return '-'
 }
+
+const openModal = (data) => {
+  emit('open:modal', data)
+}
 </script>
 
 <style lang="scss" scoped>
@@ -77,14 +86,12 @@ const formatDocument = ({ pix_key, pix_key_type }) => {
     margin-bottom: 4rem;
   }
 
-  &__link {
-    margin-left: 0.5rem;
-    font-weight: 600;
-    cursor: pointer;
-  }
-
   table {
     width: 100%;
+  }
+
+  .table-row {
+    cursor: pointer;
   }
 
   th {
