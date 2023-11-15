@@ -16,7 +16,7 @@ const props = defineProps({
 
 const statusList = computed(() => {
   if (props.status === 'rascunho') {
-    return  {
+    return {
       label: 'Rascunho',
       classColor: 'status-pill-draft'
     }
@@ -47,8 +47,6 @@ const statusList = computed(() => {
 
   &-validated {
     background-color: $blue;
-
   }
 }
-
 </style>

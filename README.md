@@ -31,3 +31,17 @@ npm run test:unit
 ```
 npm run test:coverage
 ```
+
+### Comandos do Prettier e Linter
+
+1- Comando do Linter
+
+```
+npm run lint
+```
+
+2 - Comando para formatar o código seguindo os padrões do Prettier
+
+```
+npm run format
+```
