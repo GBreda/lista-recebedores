@@ -11,7 +11,7 @@ const router = createRouter({
     {
       path: '/add-new-receiver',
       name: 'add-new-receiver',
-      component: () => import('../views/AddNewReceiver.vue')
+      component: () => import('../views/AddNewReceiverForm.vue')
     }
   ]
 })

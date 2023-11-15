@@ -1,6 +1,8 @@
 <template>
   <header class="the-header">
-    <img data-test-id="logo" src="/src/assets/images/logo.png" alt="Transfeera logo" />
+    <router-link to="/">
+      <img data-test-id="logo" src="/src/assets/images/logo.png" alt="Transfeera logo"
+    /></router-link>
   </header>
 </template>
 

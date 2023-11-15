@@ -6,10 +6,12 @@
 </template>
 
 <script setup>
-const emit = defineEmits(['add:new-receiver'])
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
 
 const addNewReceiver = () => {
-  emit('add:new-receiver')
+  router.push({ name: 'add-new-receiver' })
 }
 </script>
 

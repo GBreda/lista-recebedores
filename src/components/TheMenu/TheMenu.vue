@@ -1,6 +1,8 @@
 <template>
   <div class="the-menu">
-    <span class="the-menu__text">Seus favorecidos</span>
+    <router-link class="the-menu__link" to="/" active-class="the-menu__active"
+      >Seus favorecidos</router-link
+    >
   </div>
 </template>
 
@@ -9,10 +11,14 @@
   background-color: $green;
   padding: 1.7rem 0 1.7rem 5rem;
 
-  &__text {
+  &__link {
     color: $white;
-    border-bottom: 0.3rem solid $white;
     padding-bottom: 1.2rem;
+    text-decoration: none;
+  }
+
+  &__active {
+    border-bottom: 0.3rem solid $white;
   }
 }
 </style>
