@@ -9,6 +9,9 @@ const ReceiversService = {
   },
   addNewReceiver(payload) {
     return ApiClient.post('/receivers', payload)
+  },
+  updateNewReceiver(payload, id) {
+    return ApiClient.put(`/receivers/${id}`, payload)
   }
 }
 

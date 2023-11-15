@@ -5,7 +5,12 @@
 
   <receivers-table @open:modal="openModal" @open:deleteModal="openDeleteModal" />
 
-  <edit-modal :showEditModal="showEditModal" :data="modalData" @close:modal="closeModal('edit')" />
+  <edit-modal
+    :showEditModal="showEditModal"
+    :data="modalData"
+    @close:modal="closeModal('edit')"
+    @open:deleteModal="openDeleteModal"
+  />
 
   <detail-modal
     :showDetailModal="showDetailModal"

@@ -84,7 +84,9 @@ const openModal = (data) => {
 }
 
 const deleteReceivers = () => {
-  emit('open:deleteModal', selectedRows)
+  emit('open:deleteModal', selectedRows.value)
+
+  selectedRows.value = []
 }
 
 const handleRowClick = (data, event) => {

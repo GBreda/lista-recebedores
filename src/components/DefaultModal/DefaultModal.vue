@@ -13,10 +13,10 @@
           <div class="modal__container__footer">
             <button class="button-outline" @click="closeModal">Voltar</button>
             <div class="modal__container__footer__edit-actions">
-              <button class="button-danger modal__container__footer__delete-button">
+              <button class="button-danger modal__container__footer__delete-button" @click="remove">
                 <img src="@/assets/images/trash-icon.png" alt="Excluir recebedor" />
               </button>
-              <button class="button-primary">Salvar</button>
+              <button class="button-primary" @click="confirm">Salvar</button>
             </div>
           </div>
         </slot>
@@ -33,10 +33,18 @@ defineProps({
   }
 })
 
-const emit = defineEmits(['close:modal'])
+const emit = defineEmits(['close:modal', 'update:confirm', 'update:remove'])
 
 const closeModal = () => {
   emit('close:modal')
+}
+
+const confirm = () => {
+  emit('update:confirm')
+}
+
+const remove = () => {
+  emit('update:remove')
 }
 </script>
 

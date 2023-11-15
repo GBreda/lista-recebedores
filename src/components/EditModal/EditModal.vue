@@ -1,5 +1,10 @@
 <template>
-  <default-modal :showModal="showEditModal" @close:modal="closeModal">
+  <default-modal
+    :showModal="showEditModal"
+    @close:modal="closeModal"
+    @update:confirm="editReceiver"
+    @update:remove="removeReceiver"
+  >
     <template #body>
       <div class="content">
         <h2 class="content__title">{{ data.name }}</h2>
@@ -20,12 +25,19 @@
 
 <script setup>
 import { reactive } from 'vue'
+import { useToastStore } from '@/stores/toastStore'
+import ReceiversService from '@/services/ReceiversService'
+import useReceiversTable from '@/composables/useReceiversTable'
 import DefaultModal from '../DefaultModal/DefaultModal.vue'
 import StatusPill from '@/components/StatusPill/StatusPill.vue'
 import ReceiverDataForm from '@/components/ReceiverDataForm/ReceiverDataForm.vue'
 import PixKeyForm from '@/components/PixKeyForm/PixKeyForm.vue'
 
-defineProps({
+const toastStore = useToastStore()
+
+const { fetchTableData } = useReceiversTable()
+
+const props = defineProps({
   showEditModal: {
     type: Boolean,
     default: false
@@ -36,20 +48,50 @@ defineProps({
   }
 })
 
-const emit = defineEmits(['close:modal'])
+const emit = defineEmits(['close:modal', 'open:deleteModal'])
 
 let formPayload = reactive({})
 
 const updateReceiverDataForm = (receiverDataForm) => {
-  formPayload = { ...formPayload, ...receiverDataForm }
+  formPayload = { ...props.data, ...formPayload, ...receiverDataForm }
 }
 
 const updatePixKeyForm = (pixKeyForm) => {
-  formPayload = { ...formPayload, ...pixKeyForm }
+  formPayload = { ...props.data, ...formPayload, ...pixKeyForm }
 }
 
 const closeModal = () => {
   emit('close:modal')
+}
+
+const editReceiver = async () => {
+  try {
+    await ReceiversService.updateNewReceiver(formPayload, props.data.id)
+
+    toastStore.setToastInfo({
+      showToast: true,
+      message: 'Favorecido alterado com sucesso!',
+      kind: 'success'
+    })
+
+    closeModal()
+
+    fetchTableData()
+  } catch {
+    toastStore.setToastInfo({
+      showToast: true,
+      message: 'Erro inesperado ao adicionar favorecidos',
+      kind: 'danger'
+    })
+
+    closeModal()
+  }
+}
+
+const removeReceiver = () => {
+  closeModal()
+
+  emit('open:deleteModal', [props.data])
 }
 </script>
 

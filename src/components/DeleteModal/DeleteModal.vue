@@ -36,8 +36,8 @@ const props = defineProps({
     default: false
   },
   data: {
-    type: Object,
-    default: () => {}
+    type: Array,
+    default: () => []
   }
 })
 
@@ -48,7 +48,7 @@ const closeModal = () => {
 }
 
 const confirmationText = computed(() => {
-  const value = props.data.value
+  const value = props.data
 
   if (value.length > 1) {
     return `Você confirma a exclusão dos ${value.length} favorecidos?`
@@ -58,17 +58,17 @@ const confirmationText = computed(() => {
 })
 
 const deleteMessage = computed(() => {
-  const value = props.data.value
+  const value = props.data
 
   if (value.length > 1) {
-    return 'Favorecidos alterados com sucesso'
+    return 'Favorecidos removidos com sucesso!'
   } else {
-    return 'Favorecido alterado com sucesso'
+    return 'Favorecido removido com sucesso!'
   }
 })
 
 const confirm = async () => {
-  const idsToDelete = props.data.value.map((item) => item.id)
+  const idsToDelete = props.data.map((item) => item.id)
 
   const deleteRequests = idsToDelete.map(async (id) => await ReceiversService.deleteReceiver(id))
 
