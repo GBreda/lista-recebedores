@@ -16,6 +16,7 @@
     :showDetailModal="showDetailModal"
     :data="modalData"
     @close:modal="closeModal('detail')"
+    @open:deleteModal="openDeleteModal"
   />
 
   <delete-modal

@@ -28,7 +28,7 @@ import { reactive } from 'vue'
 import { useToastStore } from '@/stores/toastStore'
 import ReceiversService from '@/services/ReceiversService'
 import useReceiversTable from '@/composables/useReceiversTable'
-import DefaultModal from '../DefaultModal/DefaultModal.vue'
+import DefaultModal from '../DefaultModal/Defaultmodal.vue'
 import StatusPill from '@/components/StatusPill/StatusPill.vue'
 import ReceiverDataForm from '@/components/ReceiverDataForm/ReceiverDataForm.vue'
 import PixKeyForm from '@/components/PixKeyForm/PixKeyForm.vue'
@@ -80,7 +80,7 @@ const editReceiver = async () => {
   } catch {
     toastStore.setToastInfo({
       showToast: true,
-      message: 'Erro inesperado ao adicionar favorecidos',
+      message: 'Erro inesperado ao alterar favorecidos',
       kind: 'danger'
     })
 

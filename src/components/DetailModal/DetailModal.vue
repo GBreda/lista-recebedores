@@ -1,5 +1,10 @@
 <template>
-  <default-modal :showModal="showDetailModal" @close:modal="closeModal">
+  <default-modal
+    :showModal="showDetailModal"
+    @close:modal="closeModal"
+    @update:confirm="editReceiver"
+    @update:remove="removeReceiver"
+  >
     <template #body>
       <div class="content">
         <h2 class="content__title">{{ data.name }}</h2>
@@ -35,7 +40,7 @@
 
         <div class="content__email-input">
           <label for="email">E-mail do favorecido</label>
-          <input type="text" id="email" v-model="email" @input="updateFormInputEmail" />
+          <input type="text" id="email" v-model="email" />
         </div>
       </div>
     </template>
@@ -44,11 +49,14 @@
 
 <script setup>
 import { ref } from 'vue'
-import DefaultModal from '../DefaultModal/DefaultModal.vue'
+import ReceiversService from '@/services/ReceiversService'
+import { useToastStore } from '@/stores/toastStore'
+import useReceiversTable from '@/composables/useReceiversTable'
+import DefaultModal from '../DefaultModal/Defaultmodal.vue'
 import StatusPill from '@/components/StatusPill/StatusPill.vue'
 import useFormatDocuments from '@/composables/useFormatDocuments'
 
-defineProps({
+const props = defineProps({
   showDetailModal: {
     type: Boolean,
     default: false
@@ -61,11 +69,15 @@ defineProps({
 
 const emit = defineEmits(['close:modal'])
 
+const toastStore = useToastStore()
+
+const { fetchTableData } = useReceiversTable()
+
 const { cpfMask, cnpjMask } = useFormatDocuments()
 
 const CPF_LENGTH = 14
 
-const email = ref('')
+const email = ref(props.data?.email)
 
 const closeModal = () => {
   emit('close:modal')
@@ -78,7 +90,38 @@ const formatDocument = (document) => {
   return cpfMask(document)
 }
 
-const updateFormInputEmail = () => {}
+const editReceiver = async () => {
+  const payload = {
+    ...props.data,
+    email: email.value
+  }
+  try {
+    await ReceiversService.updateNewReceiver(payload, props.data.id)
+
+    toastStore.setToastInfo({
+      showToast: true,
+      message: 'Favorecido alterado com sucesso!',
+      kind: 'success'
+    })
+
+    closeModal()
+
+    fetchTableData()
+  } catch {
+    toastStore.setToastInfo({
+      showToast: true,
+      message: 'Erro inesperado ao alterar favorecidos',
+      kind: 'danger'
+    })
+
+    closeModal()
+  }
+}
+const removeReceiver = () => {
+  closeModal()
+
+  emit('open:deleteModal', [props.data])
+}
 </script>
 
 <style lang="scss" scoped>
